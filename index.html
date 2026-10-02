@@ -57,7 +57,6 @@ footer{text-align:center;color:rgba(255,255,255,.75);font-size:13px;margin-top:2
 <body>
 <div class="wrap">
  <header>
-  <div class="logo">🎵</div>
   <h1>SANGEET PATHSHALA</h1>
   <p>Online Class Enrollment Form</p>
  </header>
@@ -130,11 +129,21 @@ footer{text-align:center;color:rgba(255,255,255,.75);font-size:13px;margin-top:2
    </div>
    <div class="msg" id="msg" role="status"></div>
   </form>
-  <div id="thanks" hidden style="padding:64px 28px;text-align:center">
-   <h2 style="color:var(--navy);margin:0;font-size:26px;letter-spacing:.02em">Enrollment Submitted Successfully</h2>
-   <div style="width:56px;height:3px;background:var(--blue);margin:16px auto 22px;border-radius:2px"></div>
-   <p style="color:var(--mute);margin:0 auto;max-width:520px;line-height:1.8;font-size:15.5px">Thank you for choosing Sangeet Pathshala. Your enrollment request has been received. Our team will review your details and contact you shortly via WhatsApp or email to confirm your class schedule.</p>
-   <button type="button" class="wa" id="another" style="flex:none;margin-top:30px;padding:13px 30px">Submit Another Enrollment</button>
+  <div id="thanks" hidden>
+   <div style="background:linear-gradient(120deg,#07090f 0%,#0a1f4d 45%,#1456d6 100%);color:#fff;padding:52px 24px;text-align:center">
+    <div style="font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#9db8f5;font-weight:600">Confirmation</div>
+    <h2 style="margin:14px 0 0;font-size:clamp(26px,5vw,38px);letter-spacing:.02em;font-weight:700">Enrollment Submitted Successfully</h2>
+    <div style="width:64px;height:3px;background:#fff;margin:20px auto 0;border-radius:2px;opacity:.9"></div>
+   </div>
+   <div style="padding:36px clamp(18px,4vw,48px) 46px;text-align:center">
+    <p style="color:var(--ink);margin:0 auto;max-width:560px;line-height:1.8;font-size:16px">Thank you for choosing <b style="color:var(--blue)">Sangeet Pathshala</b>. Your enrollment request has been received successfully.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 0;text-align:left">
+     <div style="flex:1;min-width:200px;background:var(--soft);border:1.5px solid var(--line);border-top:4px solid var(--blue);border-radius:10px;padding:16px 18px"><div style="font-size:12px;letter-spacing:.14em;color:var(--blue);font-weight:700">STEP 01</div><div style="font-weight:700;color:var(--navy);margin:4px 0">Application Review</div><div style="font-size:13.5px;color:var(--mute);line-height:1.6">Our team reviews the details you submitted.</div></div>
+     <div style="flex:1;min-width:200px;background:var(--soft);border:1.5px solid var(--line);border-top:4px solid var(--navy);border-radius:10px;padding:16px 18px"><div style="font-size:12px;letter-spacing:.14em;color:var(--blue);font-weight:700">STEP 02</div><div style="font-weight:700;color:var(--navy);margin:4px 0">We Contact You</div><div style="font-size:13.5px;color:var(--mute);line-height:1.6">You will hear from us shortly on WhatsApp or email.</div></div>
+     <div style="flex:1;min-width:200px;background:var(--soft);border:1.5px solid var(--line);border-top:4px solid var(--black);border-radius:10px;padding:16px 18px"><div style="font-size:12px;letter-spacing:.14em;color:var(--blue);font-weight:700">STEP 03</div><div style="font-weight:700;color:var(--navy);margin:4px 0">Class Confirmation</div><div style="font-size:13.5px;color:var(--mute);line-height:1.6">Your class schedule and fee details are finalized.</div></div>
+    </div>
+    <button type="button" class="wa" id="another" style="flex:none;margin-top:32px;padding:14px 34px">Submit Another Enrollment</button>
+   </div>
   </div>
  </div>
  <footer>© Sangeet Pathshala · Kathmandu, Nepal</footer>
@@ -142,7 +151,7 @@ footer{text-align:center;color:rgba(255,255,255,.75);font-size:13px;margin-top:2
 
 <script>
 // ---- Paste your Google Apps Script Web App URL here ----
-var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyiy6lORpbzwYWig93Aj_e_3enrdm1wF2VcRckluM8909psvLhPvF3maLwg3TNIcbok6g/exec";
+var SCRIPT_URL = "PASTE_WEB_APP_URL_HERE";
 // ---------------------------------------------------------
 var $ = function(i){return document.getElementById(i)};
 var val = function(i){return $(i).value.trim()};
