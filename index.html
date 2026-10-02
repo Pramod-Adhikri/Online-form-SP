@@ -83,19 +83,25 @@ footer{text-align:center;color:rgba(255,255,255,.75);font-size:13px;margin-top:2
      </div><div class="hint">You can select more than one</div></div>
     <div class="field full" id="otherWrap" hidden><label for="other">Please specify the instrument / course</label><input type="text" id="other"></div>
 
+    <div class="sec full">Musical Profile</div>
+    <div class="field"><label for="genres"><b>7.</b>Preferred Genres</label><input type="text" id="genres" placeholder="e.g. Pop, Rock, Classical, Nepali Folk"></div>
+    <div class="field"><label for="artists"><b>8.</b>Favorite Artists or Bands</label><input type="text" id="artists"></div>
+    <div class="field full"><label for="songs"><b>9.</b>Your Dream Songs to Play or Sing</label><textarea id="songs"></textarea></div>
+    <div class="field full"><label for="sixm"><b>10.</b>What Do You Want to Achieve in 6 Months?</label><textarea id="sixm"></textarea></div>
+
     <div class="sec full">Learning Background</div>
-    <div class="field full"><span class="lbl"><b>7.</b>Skill Level <span class="req">*</span></span>
+    <div class="field full"><span class="lbl"><b>11.</b>Skill Level <span class="req">*</span></span>
      <div class="opts" data-name="level">
       <label><input type="radio" name="level" value="Absolute Beginner"><span>Absolute Beginner</span></label>
       <label><input type="radio" name="level" value="Beginner"><span>Beginner</span></label>
       <label><input type="radio" name="level" value="Intermediate"><span>Intermediate</span></label>
       <label><input type="radio" name="level" value="Advanced"><span>Advanced</span></label>
      </div></div>
-    <div class="field full"><label for="exp"><b>8.</b>Previous Experience (if any)</label><textarea id="exp"></textarea></div>
+    <div class="field full"><label for="exp"><b>12.</b>Previous Experience (if any)</label><textarea id="exp"></textarea></div>
 
     <div class="sec full">Schedule</div>
-    <div class="field"><label for="time"><b>9.</b>Preferred Class Timing <span class="req">*</span></label><input type="text" id="time" placeholder="e.g. 6:00 PM – 7:00 PM NPT"><div class="hint">Please mention in Nepali Time (NPT)</div></div>
-    <div class="field"><span class="lbl"><b>10.</b>Preferred Days <span class="req">*</span></span>
+    <div class="field"><label for="time"><b>13.</b>Preferred Class Timing <span class="req">*</span></label><input type="text" id="time" placeholder="e.g. 6:00 PM – 7:00 PM NPT"><div class="hint">Please mention in Nepali Time (NPT)</div></div>
+    <div class="field"><span class="lbl"><b>14.</b>Preferred Days <span class="req">*</span></span>
      <div class="opts">
       <label><input type="radio" name="days" value="Weekdays"><span>Weekdays</span></label>
       <label><input type="radio" name="days" value="Weekends"><span>Weekends</span></label>
@@ -103,7 +109,7 @@ footer{text-align:center;color:rgba(255,255,255,.75);font-size:13px;margin-top:2
      </div></div>
 
     <div class="sec full">About You</div>
-    <div class="field full"><span class="lbl"><b>11.</b>Purpose of Learning <span class="req">*</span></span>
+    <div class="field full"><span class="lbl"><b>15.</b>Purpose of Learning <span class="req">*</span></span>
      <div class="opts">
       <label><input type="radio" name="purpose" value="Hobby"><span>Hobby</span></label>
       <label><input type="radio" name="purpose" value="Professional Career"><span>Professional Career</span></label>
@@ -111,8 +117,8 @@ footer{text-align:center;color:rgba(255,255,255,.75);font-size:13px;margin-top:2
       <label><input type="radio" name="purpose" value="Other"><span>Other</span></label>
      </div>
      <input type="text" id="purposeOther" placeholder="Please specify" style="margin-top:10px" hidden></div>
-    <div class="field full"><label for="heard"><b>12.</b>How did you hear about Sangeet Pathshala?</label><input type="text" id="heard"></div>
-    <div class="field full"><label for="goals"><b>13.</b>Any Specific Goals / Expectations from the Course</label><textarea id="goals"></textarea></div>
+    <div class="field full"><label for="heard"><b>16.</b>How did you hear about Sangeet Pathshala?</label><input type="text" id="heard"></div>
+    <div class="field full"><label for="goals"><b>17.</b>Any Specific Goals / Expectations from the Course</label><textarea id="goals"></textarea></div>
    </div>
 
    <div class="terms">
@@ -169,7 +175,7 @@ function data(){
     course:courses().map(function(c){return c==="Others"?"Others – "+val("other"):c}).join(", "),
     level:radio("level"),experience:val("exp"),timing:val("time"),days:radio("days"),
     purpose:radio("purpose")==="Other"?"Other – "+val("purposeOther"):radio("purpose"),
-    heard:val("heard"),goals:val("goals"),website:val("website")
+    heard:val("heard"),goals:val("goals"),genres:val("genres"),artists:val("artists"),songs:val("songs"),sixm:val("sixm"),website:val("website")
   };
 }
 function check(){
