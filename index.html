@@ -1,216 +1,774 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sangeet Pathshala – Online Class Enrollment</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-:root{--blue:#1456d6;--navy:#0a1f4d;--black:#07090f;--white:#fff;--ink:#101828;--mute:#5b6679;--line:#d9e0ee;--soft:#f3f6fc;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:"Poppins","Segoe UI",system-ui,sans-serif;color:var(--ink);
-background:
- linear-gradient(135deg,var(--black) 0%,var(--navy) 38%,var(--blue) 70%,#eaf0fb 100%) fixed;
-background-color:var(--navy);padding:24px 14px 48px}
-.wrap{max-width:1040px;margin:0 auto}
-header{text-align:center;color:var(--white);padding:28px 10px 26px}
-.logo{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:var(--white);display:grid;place-items:center;font-size:30px;box-shadow:0 0 0 5px rgba(255,255,255,.18)}
-header h1{margin:0;font-size:clamp(26px,5vw,38px);letter-spacing:.18em;font-weight:700}
-header p{margin:8px 0 0;font-size:15px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
-.card{background:var(--white);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.45);overflow:hidden}
-.bar{height:8px;background:linear-gradient(90deg,var(--black),var(--blue) 60%,var(--white))}
-form{padding:clamp(18px,4vw,48px)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.full{grid-column:1/-1}
-.field>label,.field>.lbl{display:block;font-weight:600;font-size:14px;margin-bottom:7px;color:var(--navy)}
-.field>label b,.field>.lbl b{display:inline-block;min-width:24px;color:var(--blue)}
-.req{color:#c0262d}
-input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{width:100%;padding:12px 13px;font:inherit;font-size:15px;color:var(--ink);background:var(--soft);border:1.5px solid var(--line);border-radius:10px;outline:none;transition:.15s}
-textarea{resize:vertical;min-height:84px}
-input:focus,select:focus,textarea:focus{border-color:var(--blue);background:var(--white);box-shadow:0 0 0 3px rgba(20,86,214,.18)}
-.hint{font-size:12.5px;color:var(--mute);margin-top:5px}
-.opts{display:flex;flex-wrap:wrap;gap:9px}
-.opts label{position:relative;cursor:pointer}
-.opts input{position:absolute;opacity:0}
-.opts span{display:inline-block;padding:9px 16px;border:1.5px solid var(--line);border-radius:999px;background:var(--soft);font-size:14px;transition:.15s}
-.opts input:checked+span{background:var(--blue);border-color:var(--blue);color:var(--white);font-weight:600}
-.opts input:focus-visible+span{box-shadow:0 0 0 3px rgba(20,86,214,.3)}
-.sec{margin:14px 0 0;padding:11px 18px;background:linear-gradient(90deg,var(--navy),var(--blue));color:var(--white);border-radius:8px;border-left:6px solid var(--black);font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
-.sec.first{margin-top:0}
-.terms{margin-top:26px;background:var(--black);color:#e6ebf7;border-radius:12px;padding:18px 22px}
-.terms h3{margin:0 0 8px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#7fa8ff}
-.terms ul{margin:0;padding-left:18px;font-size:14px;line-height:1.7}
-.agree{display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-size:14px}
-.agree input{margin-top:3px;width:18px;height:18px;accent-color:var(--blue)}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-button{font:inherit;font-weight:600;font-size:15px;padding:13px 22px;border:0;border-radius:10px;cursor:pointer;transition:.15s}
-.wa{background:var(--blue);color:var(--white);flex:1;min-width:200px}
-.em{background:var(--black);color:var(--white);flex:1;min-width:200px}
-.ghost{background:var(--soft);color:var(--navy);border:1.5px solid var(--line)}
-button:hover{transform:translateY(-1px);filter:brightness(1.08)}
-.msg{margin-top:14px;font-size:14px;font-weight:600;min-height:20px}
-.msg.err{color:#c0262d}.msg.ok{color:#0b7a3e}
-footer{text-align:center;color:rgba(255,255,255,.75);font-size:13px;margin-top:22px}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
+  :root{
+    --ink:#1B2340;
+    --navy:#141B33;
+    --navy-deep:#0D1226;
+    --brass:#C89B3C;
+    --brass-light:#E4C878;
+    --cream:#F7F0E3;
+    --maroon:#7A2E2E;
+    --line:rgba(200,155,60,0.28);
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:transparent;}
+  .spr-app{
+    font-family:var(--sans);
+    color:var(--cream);
+    background:radial-gradient(1200px 600px at 50% -10%, #202B52 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    min-height:100%;
+    width:100%;
+    padding:28px 16px 40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    box-sizing:border-box;
+  }
+  .staff{width:100%;max-width:560px;height:34px;margin-bottom:6px;opacity:0.55;}
+  .staff div{height:1px;background:var(--brass);margin:6px 0;}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--brass-light);text-align:center;margin-bottom:6px;
+  }
+  h1.title{
+    font-family:var(--serif);font-weight:700;font-size:clamp(26px,5vw,38px);
+    text-align:center;margin:0 0 4px;color:var(--cream);letter-spacing:0.01em;
+  }
+  .subtitle{
+    text-align:center;color:var(--brass-light);font-size:14px;margin-bottom:22px;
+    font-family:var(--serif);font-style:italic;
+  }
+  .tabs{
+    display:none;gap:6px;background:rgba(255,255,255,0.05);border:1px solid var(--line);
+    border-radius:999px;padding:4px;margin-bottom:24px;max-width:100%;
+  }
+  .tabs.visible{display:flex;}
+  .tab{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+    padding:8px 16px;border-radius:999px;cursor:pointer;color:var(--brass-light);
+    background:transparent;border:none;transition:background .2s, color .2s;
+    flex:1;white-space:nowrap;
+  }
+  .tab.active{background:var(--brass);color:var(--navy-deep);font-weight:700;}
+  .tab:focus-visible{outline:2px solid var(--brass-light);outline-offset:2px;}
+  .card{
+    width:100%;max-width:520px;background:var(--cream);color:var(--ink);border-radius:14px;
+    padding:32px 28px;box-shadow:0 20px 60px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.08) inset;
+  }
+  .panel{display:none;width:100%;max-width:520px;}
+  .panel.active{display:block;}
+  label{
+    display:block;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--maroon);margin:18px 0 6px;
+  }
+  label:first-of-type{margin-top:0;}
+  input[type=text], input[type=tel], input[type=password]{
+    width:100%;padding:11px 12px;border:1.5px solid rgba(27,35,64,0.18);border-radius:8px;
+    font-family:var(--sans);font-size:15px;background:#fff;color:var(--ink);
+  }
+  input:focus{outline:none;border-color:var(--maroon);box-shadow:0 0 0 3px rgba(122,46,46,0.12);}
+  .hint{font-size:12px;color:#6b6455;margin-top:4px;}
+  .submit-btn{
+    width:100%;margin-top:26px;padding:14px;border:none;border-radius:8px;background:var(--maroon);
+    color:var(--cream);font-family:var(--serif);font-size:16px;font-weight:700;letter-spacing:0.02em;
+    cursor:pointer;transition:background .2s, transform .1s;
+  }
+  .submit-btn:hover{background:#8f3838;}
+  .submit-btn:active{transform:scale(0.99);}
+  .submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .error-text{color:var(--maroon);font-size:12px;margin-top:4px;display:none;}
+  .success{text-align:center;padding:20px 0 4px;}
+  .success .check{
+    width:52px;height:52px;border-radius:50%;background:var(--maroon);color:var(--cream);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:26px;
+  }
+  .success h3{font-family:var(--serif);margin:0 0 6px;font-size:20px;}
+  .success p{margin:0;color:#5a5548;font-size:14px;}
+  .success .submitted-at{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:#8a7f66;}
+  .success button{
+    margin-top:18px;background:transparent;border:1.5px solid var(--maroon);color:var(--maroon);
+    padding:9px 18px;border-radius:8px;font-family:var(--mono);font-size:11px;
+    text-transform:uppercase;letter-spacing:0.06em;cursor:pointer;
+  }
+
+  .staff-link{
+    margin-top:34px;background:none;border:none;color:rgba(247,240,227,0.28);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;cursor:pointer;
+    text-decoration:underline;text-underline-offset:3px;
+  }
+  .staff-link:hover{color:rgba(247,240,227,0.55);}
+
+  .share-card{
+    background:var(--cream);color:var(--ink);border-radius:14px;padding:28px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.45);text-align:center;
+  }
+  .share-card h3{font-family:var(--serif);margin:0 0 4px;font-size:19px;}
+  .share-card .hint{margin-bottom:18px;}
+  #qr-box{
+    display:inline-block;padding:14px;background:#fff;border-radius:10px;
+    border:1px solid rgba(27,35,64,0.12);
+  }
+  .qr-btn-row{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+  .qr-btn-row button{
+    border:1.5px solid var(--maroon);background:transparent;color:var(--maroon);
+    padding:9px 16px;border-radius:8px;font-family:var(--mono);font-size:11px;
+    text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;
+  }
+  .qr-btn-row button:hover{background:rgba(122,46,46,0.06);}
+  .url-row{display:flex;gap:8px;margin-top:20px;text-align:left;}
+  .url-row input{flex:1;font-family:var(--mono);font-size:12px;}
+  .url-row button{
+    border:none;background:var(--ink);color:var(--cream);border-radius:8px;padding:0 16px;
+    font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;
+  }
+  .note-box{
+    margin-top:16px;padding:12px 14px;background:rgba(122,46,46,0.06);
+    border:1px solid rgba(122,46,46,0.18);border-radius:8px;font-size:12.5px;
+    color:#5a5548;text-align:left;line-height:1.5;
+  }
+
+  .admin-wrap{width:100%;max-width:780px;}
+  .stat-row{display:flex;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
+  .stat{
+    flex:1;min-width:150px;background:rgba(255,255,255,0.06);border:1px solid var(--line);
+    border-radius:12px;padding:16px 18px;
+  }
+  .stat .num{font-family:var(--serif);font-size:32px;color:var(--brass-light);line-height:1;}
+  .stat .lbl{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;
+    color:rgba(247,240,227,0.6);margin-top:6px;
+  }
+  .admin-toolbar{display:flex;gap:10px;margin-bottom:14px;justify-content:flex-end;flex-wrap:wrap;}
+  .admin-toolbar button{
+    font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+    padding:8px 14px;border-radius:8px;border:1px solid var(--line);
+    background:rgba(255,255,255,0.05);color:var(--brass-light);cursor:pointer;
+  }
+  .admin-toolbar button:hover{background:rgba(255,255,255,0.1);}
+  .admin-toolbar button.danger{border-color:rgba(122,46,46,0.5);color:#e8a3a3;}
+  .admin-toolbar button.danger:hover{background:rgba(122,46,46,0.25);}
+  .table-card{background:var(--cream);border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);}
+  .table-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table{width:100%;min-width:560px;border-collapse:collapse;color:var(--ink);}
+  thead th{
+    text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;
+    text-transform:uppercase;color:var(--maroon);padding:12px 14px;
+    border-bottom:2px solid rgba(122,46,46,0.2);background:rgba(122,46,46,0.04);
+  }
+  tbody td{padding:12px 14px;font-size:13.5px;border-bottom:1px solid rgba(27,35,64,0.08);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:rgba(122,46,46,0.04);}
+  .empty-state{padding:40px 20px;text-align:center;color:#6b6455;font-size:14px;}
+  .loading{padding:40px 20px;text-align:center;color:#6b6455;font-size:13px;font-family:var(--mono);}
+  .col-time{font-family:var(--mono);font-size:11.5px;color:#6b6455;white-space:nowrap;}
+
+  .overlay{
+    position:fixed;inset:0;background:rgba(13,18,38,0.72);display:none;
+    align-items:center;justify-content:center;z-index:1000;padding:20px;
+  }
+  .overlay.visible{display:flex;}
+  .modal{
+    background:var(--cream);color:var(--ink);border-radius:14px;padding:26px;
+    width:100%;max-width:340px;box-shadow:0 30px 80px rgba(0,0,0,0.5);
+  }
+  .modal h4{font-family:var(--serif);margin:0 0 6px;font-size:18px;}
+  .modal p{margin:0 0 14px;font-size:13px;color:#5a5548;line-height:1.5;}
+  .modal input{
+    width:100%;padding:10px 12px;border:1.5px solid rgba(27,35,64,0.18);border-radius:8px;
+    font-family:var(--mono);font-size:14px;margin-bottom:8px;
+  }
+  .modal .modal-err{color:var(--maroon);font-size:12px;margin-bottom:8px;display:none;}
+  .modal-btn-row{display:flex;gap:8px;margin-top:6px;}
+  .modal-btn-row button{
+    flex:1;padding:10px;border-radius:8px;border:none;font-family:var(--mono);
+    font-size:11.5px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;
+  }
+  .modal-btn-row .btn-primary{background:var(--maroon);color:var(--cream);}
+  .modal-btn-row .btn-primary.confirm-danger{background:#a83232;}
+  .modal-btn-row .btn-secondary{background:rgba(27,35,64,0.08);color:var(--ink);}
+
+  @media (max-width: 480px){
+    .spr-app{padding:20px 12px 32px;}
+    .tabs{width:100%;max-width:520px;}
+    .tab{padding:8px 6px;font-size:10px;}
+    .card{padding:24px 18px;border-radius:12px;}
+    .share-card{padding:20px 16px;}
+    .admin-toolbar{justify-content:stretch;}
+    .admin-toolbar button{flex:1;padding:10px 8px;font-size:10px;}
+    .stat-row{gap:10px;}
+    .stat{min-width:calc(50% - 5px);padding:12px 14px;}
+    .stat .num{font-size:26px;}
+    .url-row{flex-direction:column;}
+    .url-row button{padding:10px;}
+    .qr-btn-row button{flex:1;}
+    thead th, tbody td{padding:10px 10px;font-size:12.5px;}
+    .modal{padding:20px;}
+  }
+
+  #print-flyer{display:none;}
+  #print-flyer-img{width:100%;max-width:520px;}
+
+  @media print{
+    body *{visibility:hidden;}
+    #print-flyer, #print-flyer *{visibility:visible;}
+    #print-flyer{
+      display:flex !important;position:absolute;top:30px;left:0;right:0;
+      justify-content:center;
+    }
+  }
 </style>
-</head>
-<body>
-<div class="wrap">
- <header>
-  <h1>SANGEET PATHSHALA</h1>
-  <p>Online Class Enrollment Form</p>
- </header>
 
- <div class="card">
-  <div class="bar"></div>
-  <form id="f" novalidate>
-   <div class="grid">
-    <div class="sec full first">Personal Information</div>
-    <div class="field"><label for="name"><b>1.</b>Full Name <span class="req">*</span></label><input type="text" id="name" autocomplete="name"></div>
-    <div class="field"><label for="phone"><b>2.</b>Contact Number <span class="req">*</span></label><input type="tel" id="phone" autocomplete="tel" placeholder="+977 98XXXXXXXX"><div class="hint">WhatsApp preferred</div></div>
-    <div class="field"><label for="email"><b>3.</b>Email Address <span class="req">*</span></label><input type="email" id="email" autocomplete="email"></div>
-    <div class="field"><label for="addr"><b>4.</b>Address / Country <span class="req">*</span></label><input type="text" id="addr" autocomplete="street-address"></div>
-    <div class="field"><label for="age"><b>5.</b>Age <span class="req">*</span></label><input type="number" id="age" min="3" max="99"></div>
-    <div class="sec full">Course Selection</div>
-    <div class="field full"><span class="lbl"><b>6.</b>Instrument / Course Interested In <span class="req">*</span></span>
-     <div class="opts" id="courses">
-      <label><input type="checkbox" name="course" value="Vocal"><span>Vocal</span></label>
-      <label><input type="checkbox" name="course" value="Guitar"><span>Guitar</span></label>
-      <label><input type="checkbox" name="course" value="Piano"><span>Piano</span></label>
-      <label><input type="checkbox" name="course" value="Ukulele"><span>Ukulele</span></label>
-      <label><input type="checkbox" name="course" value="Others"><span>Others</span></label>
-     </div><div class="hint">You can select more than one</div></div>
-    <div class="field full" id="otherWrap" hidden><label for="other">Please specify the instrument / course</label><input type="text" id="other"></div>
+<div class="spr-app">
+  <div class="staff"><div></div><div></div><div></div><div></div><div></div></div>
+  <div class="eyebrow">Sangeet Pathshala &middot; Kathmandu</div>
+  <h1 class="title">Open Mic — Registration</h1>
+  <div class="subtitle">Tell us who's performing, and what</div>
 
-    <div class="sec full">Musical Profile</div>
-    <div class="field"><label for="genres"><b>7.</b>Preferred Genres</label><input type="text" id="genres" placeholder="e.g. Pop, Rock, Classical, Nepali Folk"></div>
-    <div class="field"><label for="artists"><b>8.</b>Favorite Artists or Bands</label><input type="text" id="artists"></div>
-    <div class="field full"><label for="songs"><b>9.</b>Your Dream Songs to Play or Sing</label><textarea id="songs"></textarea></div>
-    <div class="field full"><label for="sixm"><b>10.</b>What Do You Want to Achieve in 6 Months?</label><textarea id="sixm"></textarea></div>
-
-    <div class="sec full">Learning Background</div>
-    <div class="field full"><span class="lbl"><b>11.</b>Skill Level <span class="req">*</span></span>
-     <div class="opts" data-name="level">
-      <label><input type="radio" name="level" value="Absolute Beginner"><span>Absolute Beginner</span></label>
-      <label><input type="radio" name="level" value="Beginner"><span>Beginner</span></label>
-      <label><input type="radio" name="level" value="Intermediate"><span>Intermediate</span></label>
-      <label><input type="radio" name="level" value="Advanced"><span>Advanced</span></label>
-     </div></div>
-    <div class="field full"><label for="exp"><b>12.</b>Previous Experience (if any)</label><textarea id="exp"></textarea></div>
-
-    <div class="sec full">Schedule</div>
-    <div class="field"><label for="time"><b>13.</b>Preferred Class Timing <span class="req">*</span></label><input type="text" id="time" placeholder="e.g. 6:00 PM – 7:00 PM NPT"><div class="hint">Please mention in Nepali Time (NPT)</div></div>
-    <div class="field"><span class="lbl"><b>14.</b>Preferred Days <span class="req">*</span></span>
-     <div class="opts">
-      <label><input type="radio" name="days" value="Weekdays"><span>Weekdays</span></label>
-      <label><input type="radio" name="days" value="Weekends"><span>Weekends</span></label>
-      <label><input type="radio" name="days" value="Flexible"><span>Flexible</span></label>
-     </div></div>
-
-    <div class="sec full">About You</div>
-    <div class="field full"><span class="lbl"><b>15.</b>Purpose of Learning <span class="req">*</span></span>
-     <div class="opts">
-      <label><input type="radio" name="purpose" value="Hobby"><span>Hobby</span></label>
-      <label><input type="radio" name="purpose" value="Professional Career"><span>Professional Career</span></label>
-      <label><input type="radio" name="purpose" value="Improve Skills"><span>Improve Skills</span></label>
-      <label><input type="radio" name="purpose" value="Other"><span>Other</span></label>
-     </div>
-     <input type="text" id="purposeOther" placeholder="Please specify" style="margin-top:10px" hidden></div>
-    <div class="field full"><label for="heard"><b>16.</b>How did you hear about Sangeet Pathshala?</label><input type="text" id="heard"></div>
-    <div class="field full"><label for="goals"><b>17.</b>Any Specific Goals / Expectations from the Course</label><textarea id="goals"></textarea></div>
-   </div>
-
-   <div class="terms">
-    <h3>Terms &amp; Notes</h3>
-    <ul>
-     <li>Classes will be scheduled based on availability.</li>
-     <li>Fees must be cleared before the start of sessions.</li>
-     <li>Timing once finalized should be followed regularly.</li>
-     <li>Missed classes will follow institute policy.</li>
-    </ul>
-   </div>
-   <label class="agree"><input type="checkbox" id="agree"><span>I have read and agree to the Terms &amp; Notes above. <span class="req">*</span></span></label>
-
-   <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
-   <div class="actions">
-    <button type="button" class="wa" id="submit">Submit Enrollment</button>
-   </div>
-   <div class="msg" id="msg" role="status"></div>
-  </form>
-  <div id="thanks" hidden>
-   <div style="background:linear-gradient(120deg,#07090f 0%,#0a1f4d 45%,#1456d6 100%);color:#fff;padding:52px 24px;text-align:center">
-    <div style="font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#9db8f5;font-weight:600">Confirmation</div>
-    <h2 style="margin:14px 0 0;font-size:clamp(26px,5vw,38px);letter-spacing:.02em;font-weight:700">Enrollment Submitted Successfully</h2>
-    <div style="width:64px;height:3px;background:#fff;margin:20px auto 0;border-radius:2px;opacity:.9"></div>
-   </div>
-   <div style="padding:36px clamp(18px,4vw,48px) 46px;text-align:center">
-    <p style="color:var(--ink);margin:0 auto;max-width:560px;line-height:1.8;font-size:16px">Thank you for choosing <b style="color:var(--blue)">Sangeet Pathshala</b>. Your enrollment request has been received successfully.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 0;text-align:left">
-     <div style="flex:1;min-width:200px;background:var(--soft);border:1.5px solid var(--line);border-top:4px solid var(--blue);border-radius:10px;padding:16px 18px"><div style="font-size:12px;letter-spacing:.14em;color:var(--blue);font-weight:700">STEP 01</div><div style="font-weight:700;color:var(--navy);margin:4px 0">Application Review</div><div style="font-size:13.5px;color:var(--mute);line-height:1.6">Our team reviews the details you submitted.</div></div>
-     <div style="flex:1;min-width:200px;background:var(--soft);border:1.5px solid var(--line);border-top:4px solid var(--navy);border-radius:10px;padding:16px 18px"><div style="font-size:12px;letter-spacing:.14em;color:var(--blue);font-weight:700">STEP 02</div><div style="font-weight:700;color:var(--navy);margin:4px 0">We Contact You</div><div style="font-size:13.5px;color:var(--mute);line-height:1.6">You will hear from us shortly on WhatsApp or email.</div></div>
-     <div style="flex:1;min-width:200px;background:var(--soft);border:1.5px solid var(--line);border-top:4px solid var(--black);border-radius:10px;padding:16px 18px"><div style="font-size:12px;letter-spacing:.14em;color:var(--blue);font-weight:700">STEP 03</div><div style="font-weight:700;color:var(--navy);margin:4px 0">Class Confirmation</div><div style="font-size:13.5px;color:var(--mute);line-height:1.6">Your class schedule and fee details are finalized.</div></div>
-    </div>
-    <button type="button" class="wa" id="another" style="flex:none;margin-top:32px;padding:14px 34px">Submit Another Enrollment</button>
-   </div>
+  <div class="tabs" id="tab-bar" role="tablist">
+    <button class="tab active" data-tab="register">Register</button>
+    <button class="tab" data-tab="share">QR / Print</button>
+    <button class="tab" data-tab="admin">Submissions</button>
   </div>
- </div>
- <footer>© Sangeet Pathshala · Kathmandu, Nepal</footer>
+
+  <div class="panel active" id="panel-register">
+    <div class="card">
+      <div id="form-view">
+        <form id="reg-form" novalidate>
+          <label for="f-name">Student name</label>
+          <input type="text" id="f-name" autocomplete="name">
+          <div class="error-text" id="err-name">Please enter the student's name.</div>
+
+          <label for="f-contact">Contact info (phone or email)</label>
+          <input type="text" id="f-contact" autocomplete="tel">
+          <div class="error-text" id="err-contact">Please enter a phone number or email.</div>
+
+          <label for="f-teacher">Teacher</label>
+          <input type="text" id="f-teacher">
+          <div class="error-text" id="err-teacher">Please enter the teacher's name.</div>
+
+          <label for="f-song">Song to be performed</label>
+          <input type="text" id="f-song">
+          <div class="error-text" id="err-song">Please enter the song title.</div>
+
+          <button type="submit" class="submit-btn" id="submit-btn">Submit registration</button>
+        </form>
+      </div>
+      <div id="success-view" class="success" style="display:none;">
+        <div class="check">✓</div>
+        <h3>You're registered!</h3>
+        <p>Thanks — your teacher and the open mic coordinators will see your details.</p>
+        <div class="submitted-at" id="submitted-at-text"></div>
+        <button id="another-btn">Register another student</button>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <button class="staff-link" id="staff-link">Staff</button>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-share">
+    <div class="share-card">
+      <div id="qr-print-area">
+        <h3>Scan to register</h3>
+        <div class="hint" id="print-subtitle">Sangeet Pathshala &middot; Open Mic</div>
+        <div id="qr-box"></div>
+      </div>
+      <div class="qr-btn-row">
+        <button id="print-btn">Print QR</button>
+        <button id="download-btn">Download PNG</button>
+      </div>
+      <div class="url-row">
+        <input type="text" id="qr-url-input" spellcheck="false">
+        <button id="qr-update-btn">Update</button>
+      </div>
+      <div class="note-box">
+        This QR always points to the plain registration link — students who scan it only ever see the form, never these staff tabs. If you've shared/published this page, paste that public link above and press Update so the QR points to the right place.
+      </div>
+    </div>
+  </div>
+
+  <div id="print-flyer"><img id="print-flyer-img" alt="Registration QR flyer"></div>
+
+  <div class="panel" id="panel-admin">
+    <div class="admin-wrap">
+      <div class="stat-row">
+        <div class="stat">
+          <div class="num" id="stat-count">–</div>
+          <div class="lbl">Students registered</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="stat-teachers">–</div>
+          <div class="lbl">Teachers represented</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="stat-latest">–</div>
+          <div class="lbl">Latest submission</div>
+        </div>
+      </div>
+      <div class="admin-toolbar">
+        <button id="refresh-btn">Refresh</button>
+        <button id="export-btn">Export CSV</button>
+        <button id="delete-all-btn" class="danger">Delete all</button>
+      </div>
+      <div class="table-card">
+        <div class="table-scroll" id="admin-content-wrap">
+          <div id="admin-content" class="loading">Loading submissions…</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<script>
-// ---- Paste your Google Apps Script Web App URL here ----
-var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyiy6lORpbzwYWig93Aj_e_3enrdm1wF2VcRckluM8909psvLhPvF3maLwg3TNIcbok6g/exec";
-// ---------------------------------------------------------
-var $ = function(i){return document.getElementById(i)};
-var val = function(i){return $(i).value.trim()};
-var radio = function(n){var r=document.querySelector('input[name="'+n+'"]:checked');return r?r.value:""};
-var courses=function(){return Array.prototype.map.call(document.querySelectorAll('input[name="course"]:checked'),function(c){return c.value})};
-document.querySelectorAll('input[name="course"]').forEach(function(c){c.addEventListener("change",function(){$("otherWrap").hidden=courses().indexOf("Others")<0})});
-document.querySelectorAll('input[name="purpose"]').forEach(function(r){r.addEventListener("change",function(){$("purposeOther").hidden=radio("purpose")!=="Other"})});
+<div class="overlay" id="pin-overlay">
+  <div class="modal">
+    <h4>Staff access</h4>
+    <p>Enter the staff PIN to view submissions. This is a light gate, not real security — anyone with the PIN or the page's code can get in, so don't put anything truly sensitive here.</p>
+    <input type="password" id="pin-input" placeholder="PIN" autocomplete="off">
+    <div class="modal-err" id="pin-err">Incorrect PIN. Try again.</div>
+    <div class="modal-btn-row">
+      <button class="btn-secondary" id="pin-cancel">Cancel</button>
+      <button class="btn-primary" id="pin-submit">Enter</button>
+    </div>
+  </div>
+</div>
 
-function data(){
-  return {
-    name:val("name"),phone:val("phone"),email:val("email"),address:val("addr"),age:val("age"),
-    course:courses().map(function(c){return c==="Others"?"Others – "+val("other"):c}).join(", "),
-    level:radio("level"),experience:val("exp"),timing:val("time"),days:radio("days"),
-    purpose:radio("purpose")==="Other"?"Other – "+val("purposeOther"):radio("purpose"),
-    heard:val("heard"),goals:val("goals"),genres:val("genres"),artists:val("artists"),songs:val("songs"),sixm:val("sixm"),website:val("website")
+<div class="overlay" id="delete-overlay">
+  <div class="modal">
+    <h4>Delete all submissions?</h4>
+    <p>This permanently removes every student's registration for this open mic. It can't be undone. Type <strong>DELETE</strong> to confirm.</p>
+    <input type="text" id="delete-confirm-input" placeholder="Type DELETE" autocomplete="off">
+    <div class="modal-btn-row">
+      <button class="btn-secondary" id="delete-cancel">Cancel</button>
+      <button class="btn-primary confirm-danger" id="delete-confirm-btn">Delete all</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, getDocs, deleteDoc, doc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCGv_iqE1te0IsGfYuirzIOVXeZfNb3Tt8",
+  authDomain: "sangeet-pathshala-show.firebaseapp.com",
+  projectId: "sangeet-pathshala-show",
+  storageBucket: "sangeet-pathshala-show.firebasestorage.app",
+  messagingSenderId: "423742193524",
+  appId: "1:423742193524:web:4e89f3726cff06534c3621",
+  measurementId: "G-6NFQGR0D9E"
+};
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const submissionsCol = collection(db, "submissions");
+
+(function(){
+  const ADMIN_PIN = "sangeet123";
+
+  const tabBar = document.getElementById('tab-bar');
+  const tabs = document.querySelectorAll('.tab');
+  const panels = {
+    register: document.getElementById('panel-register'),
+    share: document.getElementById('panel-share'),
+    admin: document.getElementById('panel-admin')
   };
-}
-function check(){
-  var m=$("msg"),miss=[];
-  if(!val("name"))miss.push("Full Name");
-  if(!val("phone"))miss.push("Contact Number");
-  if(!/^\S+@\S+\.\S+$/.test(val("email")))miss.push("valid Email");
-  if(!val("addr"))miss.push("Address / Country");
-  if(!val("age"))miss.push("Age");
-  if(!courses().length)miss.push("Course");
-  else if(courses().indexOf("Others")>=0&&!val("other"))miss.push("Course (specify)");
-  if(!radio("level"))miss.push("Skill Level");
-  if(!val("time"))miss.push("Class Timing");
-  if(!radio("days"))miss.push("Preferred Days");
-  if(!radio("purpose"))miss.push("Purpose of Learning");
-  else if(radio("purpose")==="Other"&&!val("purposeOther"))miss.push("Purpose (specify)");
-  if(!$("agree").checked)miss.push("Terms agreement");
-  if(miss.length){m.className="msg err";m.textContent="Please complete: "+miss.join(", ")+".";return false}
-  return true;
-}
-function done(){$("f").hidden=true;$("thanks").hidden=false;window.scrollTo({top:0,behavior:"smooth"})}
-$("submit").onclick=function(){
-  if(!check())return;
-  var m=$("msg"),btn=$("submit");
-  if(SCRIPT_URL.indexOf("http")!==0){m.className="msg err";m.textContent="Form is not connected yet (SCRIPT_URL missing).";return}
-  btn.disabled=true;btn.textContent="Submitting…";
-  fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:new URLSearchParams(data())})
-   .then(done)
-   .catch(function(){btn.disabled=false;btn.textContent="Submit Enrollment";m.className="msg err";m.textContent="Could not submit. Please check your internet and try again."});
-};
-$("another").onclick=function(){
-  $("f").reset();$("otherWrap").hidden=true;$("purposeOther").hidden=true;$("msg").textContent="";
-  var b=$("submit");b.disabled=false;b.textContent="Submit Enrollment";
-  $("thanks").hidden=true;$("f").hidden=false;window.scrollTo({top:0,behavior:"smooth"});
-};
+  function showTab(name){
+    tabs.forEach(x=>x.classList.toggle('active', x.dataset.tab === name));
+    Object.keys(panels).forEach(k=>panels[k].classList.toggle('active', k === name));
+    if(name === 'admin') loadSubmissions();
+    if(name === 'share') renderQR(document.getElementById('qr-url-input').value);
+  }
+  tabs.forEach(t=>t.addEventListener('click', ()=> showTab(t.dataset.tab)));
+
+  const pinOverlay = document.getElementById('pin-overlay');
+  const pinInput = document.getElementById('pin-input');
+  const pinErr = document.getElementById('pin-err');
+
+  document.getElementById('staff-link').addEventListener('click', ()=>{
+    pinInput.value = '';
+    pinErr.style.display = 'none';
+    pinOverlay.classList.add('visible');
+    pinInput.focus();
+  });
+  document.getElementById('pin-cancel').addEventListener('click', ()=>{
+    pinOverlay.classList.remove('visible');
+  });
+  document.getElementById('pin-submit').addEventListener('click', submitPin);
+  pinInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') submitPin(); });
+
+  function submitPin(){
+    if(pinInput.value === ADMIN_PIN){
+      pinOverlay.classList.remove('visible');
+      tabBar.classList.add('visible');
+      showTab('admin');
+    }else{
+      pinErr.style.display = 'block';
+    }
+  }
+
+  function plainLink(){
+    return window.location.href.split('#')[0];
+  }
+  const qrUrlInput = document.getElementById('qr-url-input');
+  qrUrlInput.value = plainLink();
+
+  function renderQR(url){
+    const box = document.getElementById('qr-box');
+    box.innerHTML = '';
+    try{
+      new QRCode(box, {
+        text: url || plainLink(),
+        width: 220,
+        height: 220,
+        colorDark: '#1B2340',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }catch(e){
+      box.innerHTML = '<div style="padding:20px;font-size:12px;color:#7A2E2E;max-width:200px;">Could not generate the QR code in this preview. Try again once the page is published.</div>';
+    }
+  }
+  document.getElementById('qr-update-btn').addEventListener('click', ()=>{
+    renderQR(qrUrlInput.value.trim());
+  });
+
+  function roundedRectPath(ctx, x, y, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function fitText(ctx, text, maxWidth, baseFont, family){
+    let size = baseFont;
+    ctx.font = size + 'px ' + family;
+    while(ctx.measureText(text).width > maxWidth && size > 10){
+      size -= 1;
+      ctx.font = size + 'px ' + family;
+    }
+    return size;
+  }
+
+  function buildBrandedFlyer(){
+    const qrCanvas = document.querySelector('#qr-box canvas');
+    if(!qrCanvas) return null;
+
+    const W = 800, H = 1040;
+    const canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    const cx = W / 2;
+
+    // background
+    ctx.fillStyle = '#F7F0E3';
+    ctx.fillRect(0, 0, W, H);
+
+    // outer + inner borders
+    ctx.strokeStyle = '#C89B3C';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(26, 26, W - 52, H - 52);
+    ctx.strokeStyle = 'rgba(200,155,60,0.5)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(38, 38, W - 76, H - 76);
+
+    ctx.textAlign = 'center';
+
+    // eyebrow
+    ctx.fillStyle = '#7A2E2E';
+    ctx.font = '600 15px "SFMono-Regular", Consolas, monospace';
+    ctx.fillText('S A N G E E T   P A T H S H A L A   ·   K A T H M A N D U', cx, 112);
+
+    // title
+    ctx.fillStyle = '#1B2340';
+    ctx.font = '700 54px Georgia, "Times New Roman", serif';
+    ctx.fillText('Open Mic', cx, 178);
+
+    // subtitle
+    ctx.fillStyle = '#7A2E2E';
+    ctx.font = 'italic 25px Georgia, serif';
+    ctx.fillText('Scan to Register', cx, 216);
+
+    // small divider
+    ctx.strokeStyle = 'rgba(200,155,60,0.6)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(cx - 50, 244);
+    ctx.lineTo(cx + 50, 244);
+    ctx.stroke();
+
+    // QR card with soft shadow
+    const cardSize = 460, cardX = cx - cardSize / 2, cardY = 280;
+    ctx.save();
+    ctx.shadowColor = 'rgba(0,0,0,0.22)';
+    ctx.shadowBlur = 28;
+    ctx.shadowOffsetY = 10;
+    ctx.fillStyle = '#ffffff';
+    roundedRectPath(ctx, cardX, cardY, cardSize, cardSize, 18);
+    ctx.fill();
+    ctx.restore();
+
+    ctx.strokeStyle = 'rgba(27,35,64,0.12)';
+    ctx.lineWidth = 1;
+    roundedRectPath(ctx, cardX, cardY, cardSize, cardSize, 18);
+    ctx.stroke();
+
+    const qrSize = 388;
+    ctx.drawImage(qrCanvas, cx - qrSize / 2, cardY + (cardSize - qrSize) / 2, qrSize, qrSize);
+
+    // link footer
+    const linkText = (qrUrlInput.value.trim() || plainLink()).replace(/^https?:\/\//, '');
+    const monoFamily = '"SFMono-Regular", Consolas, monospace';
+    const linkSize = fitText(ctx, linkText, W - 160, 15, monoFamily);
+    ctx.fillStyle = '#5a5548';
+    ctx.font = linkSize + 'px ' + monoFamily;
+    ctx.fillText(linkText, cx, cardY + cardSize + 52);
+
+    // helper note
+    ctx.fillStyle = 'rgba(27,35,64,0.55)';
+    ctx.font = 'italic 16px Georgia, serif';
+    ctx.fillText('Present this at the registration desk', cx, cardY + cardSize + 84);
+
+    return canvas;
+  }
+
+  document.getElementById('print-btn').addEventListener('click', ()=>{
+    const canvas = buildBrandedFlyer();
+    if(!canvas){ showBanner('QR image not ready yet — open the QR / Print tab first.'); return; }
+    document.getElementById('print-flyer-img').src = canvas.toDataURL('image/png');
+    window.print();
+  });
+
+  document.getElementById('download-btn').addEventListener('click', ()=>{
+    const canvas = buildBrandedFlyer();
+    if(!canvas){ showBanner('QR image not ready yet — open the QR / Print tab first.'); return; }
+    const link = document.createElement('a');
+    link.download = 'sangeet-pathshala-open-mic-qr.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  const form = document.getElementById('reg-form');
+  const fields = {
+    name: document.getElementById('f-name'),
+    contact: document.getElementById('f-contact'),
+    teacher: document.getElementById('f-teacher'),
+    song: document.getElementById('f-song')
+  };
+  const errs = {
+    name: document.getElementById('err-name'),
+    contact: document.getElementById('err-contact'),
+    teacher: document.getElementById('err-teacher'),
+    song: document.getElementById('err-song')
+  };
+
+  function validate(){
+    let ok = true;
+    Object.keys(fields).forEach(k=>{
+      const val = fields[k].value.trim();
+      if(!val){
+        errs[k].style.display = 'block';
+        fields[k].style.borderColor = '#7A2E2E';
+        ok = false;
+      }else{
+        errs[k].style.display = 'none';
+        fields[k].style.borderColor = 'rgba(27,35,64,0.18)';
+      }
+    });
+    return ok;
+  }
+
+  function fmtDateTime(iso){
+    try{
+      const d = new Date(iso);
+      return d.toLocaleString('en-US', {
+        timeZone: 'Asia/Kathmandu',
+        month: 'short', day: 'numeric', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }catch(e){ return iso; }
+  }
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    if(!validate()) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const submittedAt = new Date().toISOString();
+    const entry = {
+      name: fields.name.value.trim(),
+      contact: fields.contact.value.trim(),
+      teacher: fields.teacher.value.trim(),
+      song: fields.song.value.trim(),
+      submittedAt: submittedAt
+    };
+
+    try{
+      await addDoc(submissionsCol, entry);
+      document.getElementById('form-view').style.display = 'none';
+      document.getElementById('success-view').style.display = 'block';
+      document.getElementById('submitted-at-text').textContent = 'Submitted ' + fmtDateTime(submittedAt) + ' (Kathmandu time)';
+      form.reset();
+    }catch(err){
+      btn.disabled = false;
+      btn.textContent = 'Submit registration';
+      showBanner('Something went wrong saving your registration. Please try again.');
+      console.error(err);
+    }
+  });
+
+  document.getElementById('another-btn').addEventListener('click', ()=>{
+    document.getElementById('success-view').style.display = 'none';
+    document.getElementById('form-view').style.display = 'block';
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = false;
+    btn.textContent = 'Submit registration';
+  });
+
+  let cache = [];
+
+  async function loadSubmissions(){
+    const content = document.getElementById('admin-content');
+    content.className = 'loading';
+    content.textContent = 'Loading submissions…';
+    try{
+      const snapshot = await getDocs(submissionsCol);
+      const entries = [];
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        data._id = docSnap.id;
+        entries.push(data);
+      });
+      cache = entries.sort((a,b)=> new Date(b.submittedAt) - new Date(a.submittedAt));
+      renderAdmin();
+    }catch(e){
+      content.className = 'empty-state';
+      content.textContent = 'Could not load submissions. Try Refresh.';
+      console.error(e);
+    }
+  }
+
+  function renderAdmin(){
+    document.getElementById('stat-count').textContent = cache.length;
+    const teacherSet = new Set(cache.map(c=>c.teacher).filter(Boolean));
+    document.getElementById('stat-teachers').textContent = teacherSet.size;
+    document.getElementById('stat-latest').textContent = cache.length ? fmtDateTime(cache[0].submittedAt) : '–';
+
+    const content = document.getElementById('admin-content');
+    if(cache.length === 0){
+      content.className = 'empty-state';
+      content.textContent = 'No registrations yet. Share the QR code to get started.';
+      return;
+    }
+    content.className = '';
+    const rows = cache.map((c, i)=>`
+      <tr>
+        <td>${i+1}</td>
+        <td>${escapeHtml(c.name)}</td>
+        <td>${escapeHtml(c.contact)}</td>
+        <td>${escapeHtml(c.teacher)}</td>
+        <td>${escapeHtml(c.song)}</td>
+        <td class="col-time">${fmtDateTime(c.submittedAt)}</td>
+      </tr>
+    `).join('');
+    content.innerHTML = `
+      <table>
+        <thead>
+          <tr><th>#</th><th>Name</th><th>Contact</th><th>Teacher</th><th>Song</th><th>Date filled</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function escapeHtml(str){
+    const d = document.createElement('div');
+    d.textContent = str == null ? '' : String(str);
+    return d.innerHTML;
+  }
+
+  document.getElementById('refresh-btn').addEventListener('click', loadSubmissions);
+
+  document.getElementById('export-btn').addEventListener('click', ()=>{
+    if(cache.length === 0){ showBanner('No submissions to export yet.'); return; }
+    const header = ['Name','Contact','Teacher','Song','Date filled'];
+    const csvRows = [header.join(',')];
+    cache.forEach(c=>{
+      const row = [c.name, c.contact, c.teacher, c.song, fmtDateTime(c.submittedAt)].map(v=>{
+        const s = (v==null ? '' : String(v)).replace(/"/g,'""');
+        return `"${s}"`;
+      });
+      csvRows.push(row.join(','));
+    });
+    const csv = csvRows.join('\n');
+    const blob = new Blob([csv], {type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'sangeet-pathshala-open-mic-registrations.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  const deleteOverlay = document.getElementById('delete-overlay');
+  const deleteConfirmInput = document.getElementById('delete-confirm-input');
+
+  document.getElementById('delete-all-btn').addEventListener('click', ()=>{
+    if(cache.length === 0){ showBanner('There is nothing to delete yet.'); return; }
+    deleteConfirmInput.value = '';
+    deleteOverlay.classList.add('visible');
+  });
+  document.getElementById('delete-cancel').addEventListener('click', ()=>{
+    deleteOverlay.classList.remove('visible');
+  });
+  document.getElementById('delete-confirm-btn').addEventListener('click', async ()=>{
+    if(deleteConfirmInput.value.trim().toUpperCase() !== 'DELETE'){
+      deleteConfirmInput.style.borderColor = '#7A2E2E';
+      return;
+    }
+    const btn = document.getElementById('delete-confirm-btn');
+    btn.disabled = true;
+    btn.textContent = 'Deleting…';
+    try{
+      await Promise.all(cache.map(c => deleteDoc(doc(db, "submissions", c._id))));
+      deleteOverlay.classList.remove('visible');
+      cache = [];
+      renderAdmin();
+    }catch(e){
+      showBanner('Some entries could not be deleted. Try Refresh and delete again.');
+      console.error(e);
+    }finally{
+      btn.disabled = false;
+      btn.textContent = 'Delete all';
+    }
+  });
+
+  function showBanner(msg){
+    let b = document.getElementById('spr-banner');
+    if(!b){
+      b = document.createElement('div');
+      b.id = 'spr-banner';
+      b.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1B2340;color:#F7F0E3;padding:12px 18px;border-radius:8px;font-family:-apple-system,sans-serif;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,0.4);z-index:2000;max-width:80vw;text-align:center;';
+      document.body.appendChild(b);
+    }
+    b.textContent = msg;
+    b.style.display = 'block';
+    clearTimeout(b._t);
+    b._t = setTimeout(()=>{ b.style.display = 'none'; }, 3200);
+  }
+
+})();
 </script>
-</body>
-</html>
